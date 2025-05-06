@@ -25,3 +25,9 @@ class BasePage:
     def click_on_element(self, locator, timeout=10):
         element = self.wait_for_element(locator, timeout)
         self.driver.execute_script("arguments[0].click();", element)
+
+    @allure.step("Ввести текст в поле ввода")
+    def send_keys_to_input(self, locator, keys, timeout=10):
+        element = self.wait_for_element(locator, timeout)
+        element.clear()
+        element.send_keys(keys)
