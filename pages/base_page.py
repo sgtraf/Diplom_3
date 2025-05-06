@@ -16,3 +16,12 @@ class BasePage:
     @allure.step('Перетащить элемент')
     def drag_and_drop_element(self, source, target):
         drag_and_drop(self.driver, source, target)
+
+    @allure.step("Подождать видимости элемента")
+    def wait_for_element(self, locator, timeout=10):
+        return WebDriverWait(self.driver, timeout).until(EC.visibility_of_element_located(locator))
+
+    @allure.step("Кликнуть на элемент")
+    def click_on_element(self, locator, timeout=10):
+        element = self.wait_for_element(locator, timeout)
+        self.driver.execute_script("arguments[0].click();", element)
