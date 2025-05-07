@@ -1,7 +1,7 @@
 import allure
 import curl
 from pages.lk_page import LkPage
-from locators.lk_locators import LkPageLocators
+from locators.recover_locators import RecoverPageLocators
 
 
 class TestRecoverPassword:
@@ -12,7 +12,7 @@ class TestRecoverPassword:
         with allure.step('Открыть страницу личного кабинета'):
             driver.get(curl.MAIN_URL + curl.LK_URL)
         with allure.step('Нажимаем на текст "Восстановление пароля"'):
-            lk_page.click_on_element(LkPageLocators.TEXT_RECOVER_PASS)
+            lk_page.click_on_element(RecoverPageLocators.TEXT_RECOVER_PASS)
         lk_page.main_page_loading_wait()
 
         with allure.step('Проверяем URL страницы'):
@@ -26,11 +26,11 @@ class TestRecoverPassword:
             driver.get(curl.MAIN_URL + curl.FORGOT_PASS_URL)
         lk_page.main_page_loading_wait()
         with allure.step('Заполняем поле email'):
-            lk_page.send_keys_to_input(LkPageLocators.FIELD_EMAIL_RECOVER, 'gggg@kkkk.ru')
+            lk_page.send_keys_to_input(RecoverPageLocators.FIELD_EMAIL_RECOVER, 'gggg@kkkk.ru')
         with allure.step('Нажимаем на кнопку "Восстановить"'):
-            lk_page.click_on_element(LkPageLocators.BUTTON_RECOVER_PASS)
+            lk_page.click_on_element(RecoverPageLocators.BUTTON_RECOVER_PASS)
         lk_page.main_page_loading_wait()
-        lk_page.wait_for_element(LkPageLocators.BUTTON_SAVE)
+        lk_page.wait_for_element(RecoverPageLocators.BUTTON_SAVE)
 
         with allure.step('Проверяем URL страницы'):
             assert driver.current_url == curl.MAIN_URL+curl.RESET_PASS_URL
@@ -43,13 +43,13 @@ class TestRecoverPassword:
             driver.get(curl.MAIN_URL + curl.FORGOT_PASS_URL)
         lk_page.main_page_loading_wait()
         with allure.step('Заполняем поле email'):
-            lk_page.send_keys_to_input(LkPageLocators.FIELD_EMAIL_RECOVER, 'gggg@kkkk.ru')
+            lk_page.send_keys_to_input(RecoverPageLocators.FIELD_EMAIL_RECOVER, 'gggg@kkkk.ru')
         with allure.step('Нажимаем на кнопку "Восстановить"'):
-            lk_page.click_on_element(LkPageLocators.BUTTON_RECOVER_PASS)
+            lk_page.click_on_element(RecoverPageLocators.BUTTON_RECOVER_PASS)
         lk_page.main_page_loading_wait()
-        lk_page.wait_for_element(LkPageLocators.BUTTON_SAVE)
+        lk_page.wait_for_element(RecoverPageLocators.BUTTON_SAVE)
         with allure.step('Нажимаем на иконку "Показать пароль"'):
-            lk_page.click_on_element(LkPageLocators.BUTTON_PASSWORD_VISIBILITY)
+            lk_page.click_on_element(RecoverPageLocators.BUTTON_PASSWORD_VISIBILITY)
 
         with allure.step('Проверяем наличие слова focused в атрибуте class поля ввода пароля'):
-            assert 'focused' in lk_page.wait_for_element(LkPageLocators.FIELD_PASSWORD).get_attribute('class')
+            assert 'focused' in lk_page.wait_for_element(RecoverPageLocators.FIELD_PASSWORD).get_attribute('class')

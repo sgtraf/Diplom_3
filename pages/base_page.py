@@ -2,10 +2,16 @@ import allure
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from seletools.actions import drag_and_drop
+from locators.main_page_locators import MainPageLocators
+
 
 class BasePage:
     def __init__(self, driver):
         self.driver = driver
+
+    @allure.step('Ждем загрузки главной')
+    def main_page_loading_wait(self):
+        self.wait_for_element_hide(MainPageLocators.OVERLAY)
 
     @allure.step('Ждем пока элемент станет невидимым')
     def wait_for_element_hide(self, locator):
