@@ -48,3 +48,11 @@ class TestGeneral:
         with allure.step('Проверяем исчезновение кнопки закрытия окна'):
             assert WebDriverWait(driver, 2).until(EC.invisibility_of_element_located
                                                        (MainPageLocators.WINDOW_CLOSE_BUTTON))
+
+    @allure.title("Тест при добавлении ингредиента в заказ, увеличивается каунтер данного ингредиента")
+    def test_increase_counter(self, driver):
+        lk_page = LkPage(driver)
+        with allure.step('Переносим в корзину две булки'):
+            lk_page.put_ingredient_into_basket()
+        with allure.step('Проверяем значение счетчика'):
+            assert int(lk_page.wait_for_element(MainPageLocators.COUNTER).text) == 2
