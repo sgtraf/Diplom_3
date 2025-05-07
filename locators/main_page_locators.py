@@ -8,6 +8,8 @@ class MainPageLocators:
     BUTTON_CONSTRUCTOR = (By.XPATH, "//p[text()='Конструктор']")
     LABEL_CONSTRUCTOR = (By.XPATH, "//h1[text()='Соберите бургер']")
     BUTTON_ORDER_FEED = (By.XPATH, "//p[text()='Лента Заказов']")
+    INGREDIENT = (By.XPATH, "//img[@alt='Краторная булка N-200i']")
+    WINDOW_CLOSE_BUTTON = (By.XPATH, "//button[@class='Modal_modal__close_modified__3V5XS Modal_modal__close__TnseK']")
 
 
 

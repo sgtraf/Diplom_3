@@ -25,3 +25,12 @@ class TestGeneral:
         lk_page.main_page_loading_wait()
         with allure.step('Проверяем URL страницы'):
             assert driver.current_url == curl.MAIN_URL + curl.FEED_URL
+
+    @allure.title("Тест если кликнуть на ингредиент, появится всплывающее окно с деталями")
+    def test_click_on_ingredient(self, driver):
+        lk_page = LkPage(driver)
+        with allure.step('Нажать на изображение ингредиента'):
+            lk_page.click_on_element(MainPageLocators.INGREDIENT)
+        lk_page.main_page_loading_wait()
+        with allure.step('Проверяем появление кнопки закрытия окна'):
+            assert lk_page.wait_for_element(MainPageLocators.WINDOW_CLOSE_BUTTON)
