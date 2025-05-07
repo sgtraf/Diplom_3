@@ -7,3 +7,4 @@ class LkPageLocators:
     PASSWORD_INPUT = (By.NAME, "Пароль")
     BUTTON_SAVE = (By.XPATH, "//button[text()='Сохранить']")
     BUTTON_HISTORY = (By.XPATH, "//a[text()='История заказов']")
+    BUTTON_LOGOUT = (By.XPATH, "//button[text()='Выход']")
