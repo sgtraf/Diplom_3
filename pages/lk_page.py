@@ -6,8 +6,6 @@ from locators.main_page_locators import MainPageLocators
 
 class LkPage(BasePage):
 
-
-
     @allure.step('Перетащить элемент в корзину')
     def put_ingredient_into_basket(self):
         self.main_page_loading_wait()
@@ -15,8 +13,4 @@ class LkPage(BasePage):
         basket = self.find_element_with_wait(locator=MainPageLocators.BASKET)
         self.drag_and_drop_element(source=ingredient, target=basket)
 
-    def enter_email(self, email):
-        self.driver.find_element(*LoginPageLocators.EMAIL_INPUT).send_keys(email)
 
-    def enter_password(self, password):
-        self.driver.find_element(*LoginPageLocators.PASSWORD_INPUT).send_keys(password)

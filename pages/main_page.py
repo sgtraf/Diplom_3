@@ -7,4 +7,4 @@ class MainPage(BasePage):
 
     @allure.step("Подождать загрузки страницы")
     def wait_for_questions_list(self):
-        self.wait_for_element(MainPageLocators.QUESTIONS)
+        self.wait_for_element(MainPageLocators.BUTTON_ORDER_FEED)
