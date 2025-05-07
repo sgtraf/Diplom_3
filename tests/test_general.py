@@ -1,4 +1,6 @@
 import allure
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 import curl
 from locators.main_page_locators import MainPageLocators
 from pages.lk_page import LkPage
@@ -34,3 +36,15 @@ class TestGeneral:
         lk_page.main_page_loading_wait()
         with allure.step('Проверяем появление кнопки закрытия окна'):
             assert lk_page.wait_for_element(MainPageLocators.WINDOW_CLOSE_BUTTON)
+
+    @allure.title("Тест всплывающее окно закрывается кликом по крестику")
+    def test_close_window_after_click(self, driver):
+        lk_page = LkPage(driver)
+        with allure.step('Нажать на изображение ингредиента'):
+            lk_page.click_on_element(MainPageLocators.INGREDIENT)
+        lk_page.main_page_loading_wait()
+        with allure.step('Нажать на изображение крестика'):
+            lk_page.click_on_element(MainPageLocators.WINDOW_CLOSE_BUTTON)
+        with allure.step('Проверяем исчезновение кнопки закрытия окна'):
+            assert WebDriverWait(driver, 2).until(EC.invisibility_of_element_located
+                                                       (MainPageLocators.WINDOW_CLOSE_BUTTON))
