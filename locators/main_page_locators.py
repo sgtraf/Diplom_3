@@ -13,5 +13,5 @@ class MainPageLocators:
     WINDOW_CLOSE_BUTTON = (By.XPATH, "//buton[@class='Modal_modal__close_modified__3V5XS Modal_modal__close__TnseK']")
     BASKET = (By.XPATH, "//ul[ @class ='BurgerConstructor_basket__list__l9dp_']")
     COUNTER = (By.XPATH, "//p[ @class ='counter_counter__num__3nue1']")
-
-
+    ORDER_ID = (By.XPATH, "//h2[@class ='Modal_modal__title_shadow__3ikwq Modal_modal__title__2L34m text "
+                          "text_type_digits-large mb-8']")
