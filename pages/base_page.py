@@ -27,6 +27,10 @@ class BasePage:
     def wait_for_element(self, locator, timeout=10):
         return WebDriverWait(self.driver, timeout).until(EC.visibility_of_element_located(locator))
 
+    @allure.step("Подождать до наступления условия")
+    def wait_for_element_condition(self, condition,  timeout=10):
+        return WebDriverWait(self.driver, timeout).until(condition)
+
     @allure.step("Подождать видимости элемента с нулевыми размерами")
     def wait_for_element_with_no_widht(self, locator, timeout=10):
         return WebDriverWait(self.driver, timeout).until(EC.presence_of_element_located(locator))

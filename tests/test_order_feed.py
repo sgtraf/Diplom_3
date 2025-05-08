@@ -74,11 +74,19 @@ class TestOrderFeed:
         with allure.step('Проверяем изменение счетчика'):
             assert total_order_new > total_order
 
-
-
-
-
-
-
-
-
+    @allure.title("Тест после оформления заказа его номер появляется в разделе В работе")
+    def test_create_order_increase_in_work(self, driver, order):
+        order_number = order
+        order_feed_page = OrderFeedPage(driver)
+        with allure.step('Открываем страницу ленты заказов'):
+            order_feed_page.open()
+        order_feed_page.main_page_loading_wait()
+        with allure.step('Ждем появления номера заказа в секции В работе, условие срабатывает, '
+                         'когда вместо текста, появляется нужный номер. Сложнейшее условие.'):
+            in_work = order_feed_page.wait_for_element_condition(lambda drv: str(order_number) in
+                                                                         order_feed_page.wait_for_element
+                                                                         (OrderFeedPageLocators.IN_WORK).text,
+                                                             timeout=15)
+        print(in_work)
+        with allure.step('Проверяем наличие номера заказа в секции "В работе" '):
+            assert order_number == int(order_feed_page.wait_for_element(OrderFeedPageLocators.IN_WORK).text)
