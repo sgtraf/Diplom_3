@@ -20,4 +20,20 @@ class TestOrderFeed:
         with allure.step('Проверяем открытие всплывающего окна'):
             assert order_feed_page.is_window_open()
 
+    @allure.title("Тест заказы пользователя из раздела «История заказов» отображаются на странице «Лента заказов»")
+    def test_view_from_history_order(self, driver, order):
+        order_number = order
+        order_feed_page = OrderFeedPage(driver)
+        with allure.step('Открываем страницу ленты заказов'):
+            order_feed_page.open()
+        order_feed_page.main_page_loading_wait()
+        with allure.step('Проверяем наличие заказа из истории в ленте заказов'):
+            assert order_feed_page.is_order_in_feed(order_feed_page, order_number)
+
+
+
+
+
+
+
 

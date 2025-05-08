@@ -7,6 +7,10 @@ from faker import Faker
 from pages.lk_page import LkPage
 from pages.cabinet_page import CabinetPage
 from locators.lk_page_locators import LkPageLocators
+from locators.main_page_locators import MainPageLocators
+from locators.order_feed_locators import OrderFeedPageLocators
+
+
 
 @pytest.fixture(params=["chrome", "firefox"])
 def driver(request):
@@ -57,3 +61,20 @@ def login(driver, registration_user_api):
     with allure.step('Нажимаем на кнопку "Войти"'):
         login_page.click_on_element(LkPageLocators.BUTTON_ENTER)
     return CabinetPage(driver)
+
+@pytest.fixture(scope="function")
+def order(driver, login):
+    lk_page = LkPage(driver)
+    lk_page.main_page_loading_wait()
+    with allure.step('Переносим в корзину две булки'):
+        lk_page.put_ingredient_into_basket()
+    with allure.step('Нажимаем на кнопку оформить заказ'):
+        lk_page.click_on_element(MainPageLocators.BUTTON_TAKE_ORDER)
+    lk_page.main_page_loading_wait()
+    with allure.step('Ждем появления div с нулевыми размерами перед обновлением номера заказа'):
+        lk_page.wait_for_element_with_no_widht(OrderFeedPageLocators.CARD_ORDER_WINDOW_UPDATED)
+    with allure.step('Ждем появления обновленного номера заказа'):
+        lk_page.wait_for_element(OrderFeedPageLocators.NUMBER_ORDER_UPDATED)
+    with allure.step('Присваеваем номер заказа переменной'):
+        order_number = int(lk_page.wait_for_element(MainPageLocators.ORDER_ID).text)
+    return order_number
