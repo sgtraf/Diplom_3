@@ -1,4 +1,5 @@
 import allure
+import curl
 from pages.base_page import BasePage
 from locators.recover_locators import RecoverPageLocators
 from locators.main_page_locators import MainPageLocators
@@ -6,11 +7,10 @@ from locators.main_page_locators import MainPageLocators
 
 class LkPage(BasePage):
 
-    @allure.step('Перетащить элемент в корзину')
-    def put_ingredient_into_basket(self):
-        self.main_page_loading_wait()
-        ingredient = self.wait_for_element(locator=MainPageLocators.INGREDIENT_0)
-        basket = self.wait_for_element(locator=MainPageLocators.BASKET)
-        self.drag_and_drop_element(source=ingredient, target=basket)
+
+
+    @allure.step('Открыть страницу ЛК')
+    def open(self):
+        self.driver.get(curl.MAIN_URL + curl.LK_URL)
 
 

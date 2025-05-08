@@ -15,3 +15,4 @@ class MainPageLocators:
     COUNTER = (By.XPATH, "//p[ @class ='counter_counter__num__3nue1']")
     ORDER_ID = (By.XPATH, "//h2[@class ='Modal_modal__title_shadow__3ikwq Modal_modal__title__2L34m text "
                           "text_type_digits-large mb-8']")
+    LOGO = (By.XPATH, "//div[@class ='AppHeader_header__logo__2D0X2']")

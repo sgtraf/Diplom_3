@@ -4,6 +4,7 @@ import requests
 from selenium import webdriver
 import curl
 from faker import Faker
+from pages.main_page import MainPage
 from pages.lk_page import LkPage
 from pages.cabinet_page import CabinetPage
 from locators.lk_page_locators import LkPageLocators
@@ -55,26 +56,26 @@ def registration_user_api():
 def login(driver, registration_user_api):
     login_page = LkPage(driver)
     with allure.step('Открыть страницу личного кабинета'):
-        driver.get(curl.MAIN_URL + curl.LK_URL)
+        login_page.open()
     login_page.send_keys_to_input(LkPageLocators.EMAIL_INPUT, registration_user_api["email"])
     login_page.send_keys_to_input(LkPageLocators.PASSWORD_INPUT, registration_user_api["password"])
     with allure.step('Нажимаем на кнопку "Войти"'):
         login_page.click_on_element(LkPageLocators.BUTTON_ENTER)
-    return CabinetPage(driver)
+    return LkPage(driver)
 
 @pytest.fixture(scope="function")
 def order(driver, login):
-    lk_page = LkPage(driver)
-    lk_page.main_page_loading_wait()
+    main_page = MainPage(driver)
+    main_page.main_page_loading_wait()
     with allure.step('Переносим в корзину две булки'):
-        lk_page.put_ingredient_into_basket()
+        main_page.put_ingredient_into_basket()
     with allure.step('Нажимаем на кнопку оформить заказ'):
-        lk_page.click_on_element(MainPageLocators.BUTTON_TAKE_ORDER)
-    lk_page.main_page_loading_wait()
+        main_page.click_on_element(MainPageLocators.BUTTON_TAKE_ORDER)
+    main_page.main_page_loading_wait()
     with allure.step('Ждем появления div с нулевыми размерами перед обновлением номера заказа'):
-        lk_page.wait_for_element_with_no_widht(OrderFeedPageLocators.CARD_ORDER_WINDOW_UPDATED)
+        main_page.wait_for_element_with_no_widht(OrderFeedPageLocators.CARD_ORDER_WINDOW_UPDATED)
     with allure.step('Ждем появления обновленного номера заказа'):
-        lk_page.wait_for_element(OrderFeedPageLocators.NUMBER_ORDER_UPDATED)
-    with allure.step('Присваеваем номер заказа переменной'):
-        order_number = int(lk_page.wait_for_element(MainPageLocators.ORDER_ID).text)
+        main_page.wait_for_element(OrderFeedPageLocators.NUMBER_ORDER_UPDATED)
+    with allure.step('Присваиваем номер заказа переменной'):
+        order_number = int(main_page.wait_for_element(MainPageLocators.ORDER_ID).text)
     return order_number

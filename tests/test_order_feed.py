@@ -5,6 +5,8 @@ import curl
 from locators.main_page_locators import MainPageLocators
 from pages.order_feed_page import OrderFeedPage
 from locators.order_feed_locators import OrderFeedPageLocators
+from pages.main_page import MainPage
+
 
 
 class TestOrderFeed:
@@ -29,6 +31,30 @@ class TestOrderFeed:
         order_feed_page.main_page_loading_wait()
         with allure.step('Проверяем наличие заказа из истории в ленте заказов'):
             assert order_feed_page.is_order_in_feed(order_feed_page, order_number)
+
+    @allure.title("Тест при создании нового заказа счётчик Выполнено за всё время увеличивается")
+    def test_create_order_increase_count(self, driver, login):
+        main_page = MainPage(driver)
+        with allure.step('Делаем заказ'):
+            main_page.take_order()
+        with allure.step('Открыть страницу "Ленты"'):
+            driver.get(curl.MAIN_URL + curl.FEED_URL)
+        total_order = main_page.wait_for_element(OrderFeedPageLocators.TOTAL_ORDERS).text
+        with allure.step('Открыть страницу главную страницу"'):
+            driver.get(curl.MAIN_URL)
+        main_page.main_page_loading_wait()
+        with allure.step('Делаем заказ'):
+            main_page.take_order()
+        with allure.step('Открыть страницу "Ленты"'):
+            driver.get(curl.MAIN_URL + curl.FEED_URL)
+        main_page.main_page_loading_wait()
+        main_page.wait_for_element(OrderFeedPageLocators.TOTAL_ORDERS)
+        total_order_new = main_page.wait_for_element(OrderFeedPageLocators.TOTAL_ORDERS).text
+        with allure.step('Проверяем изменение счетчика'):
+            assert total_order_new > total_order
+
+
+
 
 
 

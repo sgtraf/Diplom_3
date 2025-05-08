@@ -4,6 +4,8 @@ from selenium.webdriver.support import expected_conditions as EC
 import curl
 from locators.main_page_locators import MainPageLocators
 from pages.lk_page import LkPage
+from pages.main_page import MainPage
+
 
 
 class TestGeneral:
@@ -51,18 +53,18 @@ class TestGeneral:
 
     @allure.title("Тест при добавлении ингредиента в заказ, увеличивается каунтер данного ингредиента")
     def test_increase_counter(self, driver):
-        lk_page = LkPage(driver)
+        main_page = MainPage(driver)
         with allure.step('Переносим в корзину две булки'):
-            lk_page.put_ingredient_into_basket()
+            main_page.put_ingredient_into_basket()
         with allure.step('Проверяем значение счетчика'):
-            assert int(lk_page.wait_for_element(MainPageLocators.COUNTER).text) == 2
+            assert int(main_page.wait_for_element(MainPageLocators.COUNTER).text) == 2
 
     @allure.title("Тест залогиненный пользователь может оформить заказ")
     def test_take_order(self, driver, login):
-        lk_page = LkPage(driver)
+        main_page = MainPage(driver)
         with allure.step('Переносим в корзину две булки'):
-            lk_page.put_ingredient_into_basket()
+            main_page.put_ingredient_into_basket()
         with allure.step('Нажимаем на кнопку оформить заказ'):
-            lk_page.click_on_element(MainPageLocators.BUTTON_TAKE_ORDER)
+            main_page.click_on_element(MainPageLocators.BUTTON_TAKE_ORDER)
         with allure.step('Проверяем значение счетчика'):
-            assert int(lk_page.wait_for_element(MainPageLocators.ORDER_ID).text) != 0
+            assert int(main_page.wait_for_element(MainPageLocators.ORDER_ID).text) != 0
