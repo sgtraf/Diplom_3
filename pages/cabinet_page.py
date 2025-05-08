@@ -4,7 +4,7 @@ from locators.main_page_locators import MainPageLocators
 
 
 class CabinetPage(BasePage):
-
+#Этот метод убрать отсюда
     @allure.step('Перетащить элемент в корзину')
     def put_ingredient_into_basket(self):
         self.main_page_loading_wait()

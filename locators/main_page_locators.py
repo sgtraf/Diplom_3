@@ -10,7 +10,7 @@ class MainPageLocators:
     BUTTON_ORDER_FEED = (By.XPATH, "//p[text()='Лента Заказов']")
     INGREDIENT = (By.XPATH, "//img[@alt='Краторная булка N-200i']")
     INGREDIENT_0 = (By.XPATH, "//img[@alt='Флюоресцентная булка R2-D3']")
-    WINDOW_CLOSE_BUTTON = (By.XPATH, "//buton[@class='Modal_modal__close_modified__3V5XS Modal_modal__close__TnseK']")
+    WINDOW_CLOSE_BUTTON = (By.XPATH, "//button[@class='Modal_modal__close_modified__3V5XS Modal_modal__close__TnseK']")
     BASKET = (By.XPATH, "//ul[ @class ='BurgerConstructor_basket__list__l9dp_']")
     COUNTER = (By.XPATH, "//p[ @class ='counter_counter__num__3nue1']")
     ORDER_ID = (By.XPATH, "//h2[@class ='Modal_modal__title_shadow__3ikwq Modal_modal__title__2L34m text "
