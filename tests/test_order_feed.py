@@ -33,7 +33,7 @@ class TestOrderFeed:
             assert order_feed_page.is_order_in_feed(order_feed_page, order_number)
 
     @allure.title("Тест при создании нового заказа счётчик Выполнено за всё время увеличивается")
-    def test_create_order_increase_count(self, driver, login):
+    def test_create_order_increase_count_total(self, driver, login):
         main_page = MainPage(driver)
         with allure.step('Делаем заказ'):
             main_page.take_order()
@@ -53,7 +53,26 @@ class TestOrderFeed:
         with allure.step('Проверяем изменение счетчика'):
             assert total_order_new > total_order
 
-
+    @allure.title("Тест при создании нового заказа счётчик Выполнено за сегодня увеличивается")
+    def test_create_order_increase_count_day(self, driver, login):
+        main_page = MainPage(driver)
+        with allure.step('Делаем заказ'):
+            main_page.take_order()
+        with allure.step('Открыть страницу "Ленты"'):
+            driver.get(curl.MAIN_URL + curl.FEED_URL)
+        total_order = main_page.wait_for_element(OrderFeedPageLocators.DAY_ORDERS).text
+        with allure.step('Открыть страницу главную страницу"'):
+            driver.get(curl.MAIN_URL)
+        main_page.main_page_loading_wait()
+        with allure.step('Делаем заказ'):
+            main_page.take_order()
+        with allure.step('Открыть страницу "Ленты"'):
+            driver.get(curl.MAIN_URL + curl.FEED_URL)
+        main_page.main_page_loading_wait()
+        main_page.wait_for_element(OrderFeedPageLocators.DAY_ORDERS)
+        total_order_new = main_page.wait_for_element(OrderFeedPageLocators.DAY_ORDERS).text
+        with allure.step('Проверяем изменение счетчика'):
+            assert total_order_new > total_order
 
 
 
