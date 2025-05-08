@@ -6,11 +6,9 @@ import curl
 from faker import Faker
 from pages.main_page import MainPage
 from pages.lk_page import LkPage
-from pages.cabinet_page import CabinetPage
 from locators.lk_page_locators import LkPageLocators
 from locators.main_page_locators import MainPageLocators
 from locators.order_feed_locators import OrderFeedPageLocators
-
 
 
 @pytest.fixture(params=["chrome", "firefox"])

@@ -1,10 +1,7 @@
 import allure
 import curl
-from pages.cabinet_page import CabinetPage
-from locators.recover_locators import RecoverPageLocators
 from locators.main_page_locators import MainPageLocators
 from locators.lk_page_locators import LkPageLocators
-
 
 
 class TestCabinet:

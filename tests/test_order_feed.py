@@ -1,12 +1,8 @@
 import allure
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 import curl
-from locators.main_page_locators import MainPageLocators
 from pages.order_feed_page import OrderFeedPage
 from locators.order_feed_locators import OrderFeedPageLocators
 from pages.main_page import MainPage
-
 
 
 class TestOrderFeed:

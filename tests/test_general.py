@@ -7,7 +7,6 @@ from pages.lk_page import LkPage
 from pages.main_page import MainPage
 
 
-
 class TestGeneral:
     @allure.title("Тест перехода по клику на «Конструктор»")
     def test_transfer_to_construct(self, driver):

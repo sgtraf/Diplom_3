@@ -1,8 +1,6 @@
 import allure
 import curl
 from pages.base_page import BasePage
-from locators.recover_locators import RecoverPageLocators
-from locators.main_page_locators import MainPageLocators
 
 
 class LkPage(BasePage):

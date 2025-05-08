@@ -1,5 +1,6 @@
 from selenium.webdriver.common.by import By
 
+
 class LkPageLocators:
 
     BUTTON_ENTER = (By.XPATH, "//button[text()='Войти']")
