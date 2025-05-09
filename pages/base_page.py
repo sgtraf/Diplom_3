@@ -18,7 +18,6 @@ class BasePage:
         WebDriverWait(self.driver, 5).until(EC.invisibility_of_element_located(locator))
         return self.driver.find_element(*locator)
 
-
     @allure.step('Перетащить элемент')
     def drag_and_drop_element(self, source, target):
         drag_and_drop(self.driver, source, target)
@@ -39,7 +38,6 @@ class BasePage:
     def click_on_element(self, locator, timeout=10):
         element = self.wait_for_element(locator, timeout)
         self.driver.execute_script("arguments[0].click();", element)
-        #self.driver.find_element(*locator).click()
 
     @allure.step("Ввести текст в поле ввода")
     def send_keys_to_input(self, locator, keys, timeout=10):

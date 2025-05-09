@@ -1,6 +1,7 @@
 import allure
 import curl
 from locators.main_page_locators import MainPageLocators
+from locators.order_feed_locators import OrderFeedPageLocators
 from pages.base_page import BasePage
 
 
@@ -23,3 +24,9 @@ class MainPage(BasePage):
             self.put_ingredient_into_basket()
         with allure.step('Нажимаем на кнопку оформить заказ'):
             self.click_on_element(MainPageLocators.BUTTON_TAKE_ORDER)
+
+    def is_total_count_change(self, total_order):
+        self.wait_for_element_condition(lambda drv: str(total_order) not in
+                                                         self.wait_for_element
+                                                         (OrderFeedPageLocators.TOTAL_ORDERS).text,
+                                             timeout=10)

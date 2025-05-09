@@ -45,13 +45,12 @@ class TestOrderFeed:
             driver.get(curl.MAIN_URL + curl.FEED_URL)
 
         with allure.step('Ждем пока показания счетчика за весь день изменятся'):
-            main_page.wait_for_element_condition(lambda drv: str(total_order) not in
-                                                                         main_page.wait_for_element
-                                                                         (OrderFeedPageLocators.TOTAL_ORDERS).text,
-                                                             timeout=10)
+            main_page.is_total_count_change(total_order)
         total_order_new = main_page.wait_for_element(OrderFeedPageLocators.TOTAL_ORDERS).text
         with allure.step('Проверяем изменение счетчика'):
             assert total_order_new > total_order
+
+
 
     @allure.title("Тест при создании нового заказа счётчик Выполнено за сегодня увеличивается")
     def test_create_order_increase_count_day(self, driver, login):

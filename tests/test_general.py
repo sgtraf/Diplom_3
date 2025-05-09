@@ -1,6 +1,4 @@
 import allure
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 import curl
 from locators.main_page_locators import MainPageLocators
 from pages.lk_page import LkPage
@@ -12,7 +10,7 @@ class TestGeneral:
     def test_transfer_to_construct(self, driver):
         lk_page = LkPage(driver)
         with allure.step('Открыть страницу "Восстановление пароля"'):
-            driver.get(curl.MAIN_URL + curl.LK_URL)
+            lk_page.open()
         lk_page.main_page_loading_wait()
         with allure.step('Нажать на кнопку Конструктора'):
             lk_page.click_on_element(MainPageLocators.BUTTON_CONSTRUCTOR)
@@ -47,8 +45,7 @@ class TestGeneral:
         with allure.step('Нажать на изображение крестика'):
             lk_page.click_on_element(MainPageLocators.WINDOW_CLOSE_BUTTON)
         with allure.step('Проверяем исчезновение кнопки закрытия окна'):
-            assert WebDriverWait(driver, 2).until(EC.invisibility_of_element_located
-                                                       (MainPageLocators.WINDOW_CLOSE_BUTTON))
+            assert lk_page.is_close_button_disappear()
 
     @allure.title("Тест при добавлении ингредиента в заказ, увеличивается каунтер данного ингредиента")
     def test_increase_counter(self, driver):
