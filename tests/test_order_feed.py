@@ -43,14 +43,11 @@ class TestOrderFeed:
             main_page.take_order()
         with allure.step('Открыть страницу "Ленты"'):
             driver.get(curl.MAIN_URL + curl.FEED_URL)
-
         with allure.step('Ждем пока показания счетчика за весь день изменятся'):
             main_page.is_total_count_change(total_order)
         total_order_new = main_page.wait_for_element(OrderFeedPageLocators.TOTAL_ORDERS).text
         with allure.step('Проверяем изменение счетчика'):
             assert total_order_new > total_order
-
-
 
     @allure.title("Тест при создании нового заказа счётчик Выполнено за сегодня увеличивается")
     def test_create_order_increase_count_day(self, driver, login):
@@ -82,10 +79,6 @@ class TestOrderFeed:
         order_feed_page.main_page_loading_wait()
         with allure.step('Ждем появления номера заказа в секции В работе, условие срабатывает, '
                          'когда вместо текста, появляется нужный номер. Сложнейшее условие.'):
-            in_work = order_feed_page.wait_for_element_condition(lambda drv: str(order_number) in
-                                                                         order_feed_page.wait_for_element
-                                                                         (OrderFeedPageLocators.IN_WORK).text,
-                                                             timeout=15)
-        print(in_work)
+            order_feed_page.is_order_number_visible(order_number)
         with allure.step('Проверяем наличие номера заказа в секции "В работе" '):
             assert order_number == int(order_feed_page.wait_for_element(OrderFeedPageLocators.IN_WORK).text)

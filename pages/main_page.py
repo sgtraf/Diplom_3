@@ -25,6 +25,7 @@ class MainPage(BasePage):
         with allure.step('Нажимаем на кнопку оформить заказ'):
             self.click_on_element(MainPageLocators.BUTTON_TAKE_ORDER)
 
+    @allure.step('Ждем пока показания счетчика за весь день изменятся')
     def is_total_count_change(self, total_order):
         self.wait_for_element_condition(lambda drv: str(total_order) not in
                                                          self.wait_for_element
