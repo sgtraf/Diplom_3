@@ -43,8 +43,12 @@ class TestOrderFeed:
             main_page.take_order()
         with allure.step('Открыть страницу "Ленты"'):
             driver.get(curl.MAIN_URL + curl.FEED_URL)
-        main_page.main_page_loading_wait()
-        main_page.wait_for_element(OrderFeedPageLocators.TOTAL_ORDERS)
+
+        with allure.step('Ждем пока показания счетчика за весь день изменятся'):
+            main_page.wait_for_element_condition(lambda drv: str(total_order) not in
+                                                                         main_page.wait_for_element
+                                                                         (OrderFeedPageLocators.TOTAL_ORDERS).text,
+                                                             timeout=10)
         total_order_new = main_page.wait_for_element(OrderFeedPageLocators.TOTAL_ORDERS).text
         with allure.step('Проверяем изменение счетчика'):
             assert total_order_new > total_order
