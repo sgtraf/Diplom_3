@@ -6,6 +6,5 @@ LK_PROFILE = '/account/profile'
 LK_HISTORY = '/account/order-history'
 FEED_URL = '/feed'
 
-MAIN_URL_API = 'https://stellarburgers.nomoreparties.site'
-CREATE_AND_REGISTRATION_USER_URL = '/api/auth/register' #POST
-DELETE_USER_URL = '/api/auth/user'  # DELETE
+CREATE_AND_REGISTRATION_USER_URL = f'{MAIN_URL}/api/auth/register' #POST
+DELETE_USER_URL = f'{MAIN_URL}/api/auth/user'  # DELETE

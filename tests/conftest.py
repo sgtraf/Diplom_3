@@ -39,13 +39,13 @@ def registration_user_api():
         "name": name
     }
 
-    register_url = f"{curl.MAIN_URL_API}{curl.CREATE_AND_REGISTRATION_USER_URL}"
+    register_url = curl.CREATE_AND_REGISTRATION_USER_URL
 
     response = requests.post(register_url, data=payload)
     assert response.status_code == 200
     yield payload
 
-    response = requests.delete(curl.MAIN_URL_API+curl.DELETE_USER_URL, headers={"Authorization": response.json()["accessToken"]})
+    response = requests.delete(curl.DELETE_USER_URL, headers={"Authorization": response.json()["accessToken"]})
     assert response.status_code == 202
 
 
