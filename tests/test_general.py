@@ -45,7 +45,7 @@ class TestGeneral:
         with allure.step('Нажать на изображение крестика'):
             lk_page.click_on_element(MainPageLocators.WINDOW_CLOSE_BUTTON)
         with allure.step('Проверяем исчезновение кнопки закрытия окна'):
-            assert lk_page.is_close_button_disappear()
+            assert lk_page.is_button_disappear(MainPageLocators.WINDOW_CLOSE_BUTTON)
 
     @allure.title("Тест при добавлении ингредиента в заказ, увеличивается каунтер данного ингредиента")
     def test_increase_counter(self, driver):

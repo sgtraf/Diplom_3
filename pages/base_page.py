@@ -52,3 +52,8 @@ class BasePage:
     @allure.step("Получить текущий URL страницы")
     def get_url(self):
         return self.driver.current_url
+
+    @allure.step('Проверяем исчезновение кнопки закрытия окна')
+    def is_button_disappear(self, locator, timeout = 5):
+        return WebDriverWait(self.driver, timeout).until(EC.invisibility_of_element_located
+                                                   (locator))

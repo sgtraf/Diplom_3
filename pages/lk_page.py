@@ -1,15 +1,10 @@
 import allure
-import curl
-from locators.main_page_locators import MainPageLocators
+from locators.recover_locators import RecoverPageLocators
 from pages.base_page import BasePage
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.wait import WebDriverWait
 
 
 class LkPage(BasePage):
 
-
-    @allure.step('Проверяем исчезновение кнопки закрытия окна')
-    def is_close_button_disappear(self):
-        return WebDriverWait(self.driver, 2).until(EC.invisibility_of_element_located
-                                              (MainPageLocators.WINDOW_CLOSE_BUTTON))
+    @allure.step('Проверяем наличие слова focused в атрибуте class поля ввода пароля')
+    def is_focused_in_passwor_attr(self):
+        return 'focused' in self.wait_for_element(RecoverPageLocators.FIELD_PASSWORD).get_attribute('class')

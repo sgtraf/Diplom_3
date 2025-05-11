@@ -52,4 +52,5 @@ class TestRecoverPassword:
             lk_page.click_on_element(RecoverPageLocators.BUTTON_PASSWORD_VISIBILITY)
 
         with allure.step('Проверяем наличие слова focused в атрибуте class поля ввода пароля'):
-            assert 'focused' in lk_page.wait_for_element(RecoverPageLocators.FIELD_PASSWORD).get_attribute('class')
+            assert lk_page.is_focused_in_passwor_attr()
+

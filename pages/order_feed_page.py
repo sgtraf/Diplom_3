@@ -1,5 +1,4 @@
 import allure
-import curl
 from locators.order_feed_locators import OrderFeedPageLocators
 from pages.base_page import BasePage
 
