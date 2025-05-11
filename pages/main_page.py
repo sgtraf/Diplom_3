@@ -7,10 +7,6 @@ from pages.base_page import BasePage
 
 class MainPage(BasePage):
 
-    @allure.step("Открыть главную страницу")
-    def open(self):
-        self.driver.get(curl.MAIN_URL)
-
     @allure.step('Перетащить элемент в корзину')
     def put_ingredient_into_basket(self):
         self.main_page_loading_wait()

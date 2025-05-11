@@ -10,7 +10,7 @@ class TestOrderFeed:
     def test_open_detailed_window(self, driver):
         order_feed_page = OrderFeedPage(driver)
         with allure.step('Открываем страницу ленты заказов'):
-            order_feed_page.open()
+            order_feed_page.open(curl.MAIN_URL + curl.FEED_URL)
         order_feed_page.main_page_loading_wait()
         with allure.step('Нажать на номер заказа'):
             order_feed_page.click_on_element(OrderFeedPageLocators.CARD_ORDER_FEED)
@@ -23,7 +23,7 @@ class TestOrderFeed:
         order_number = order
         order_feed_page = OrderFeedPage(driver)
         with allure.step('Открываем страницу ленты заказов'):
-            order_feed_page.open()
+            order_feed_page.open(curl.MAIN_URL + curl.FEED_URL)
         order_feed_page.main_page_loading_wait()
         with allure.step('Проверяем наличие заказа из истории в ленте заказов'):
             assert order_feed_page.is_order_in_feed(order_feed_page, order_number)
@@ -34,15 +34,15 @@ class TestOrderFeed:
         with allure.step('Делаем заказ'):
             main_page.take_order()
         with allure.step('Открыть страницу "Ленты"'):
-            driver.get(curl.MAIN_URL + curl.FEED_URL)
+            main_page.open(curl.MAIN_URL + curl.FEED_URL)
         total_order = main_page.wait_for_element(OrderFeedPageLocators.TOTAL_ORDERS).text
         with allure.step('Открыть страницу главную страницу"'):
-            driver.get(curl.MAIN_URL)
+            main_page.open(curl.MAIN_URL)
         main_page.main_page_loading_wait()
         with allure.step('Делаем заказ'):
             main_page.take_order()
         with allure.step('Открыть страницу "Ленты"'):
-            driver.get(curl.MAIN_URL + curl.FEED_URL)
+            main_page.open(curl.MAIN_URL + curl.FEED_URL)
         with allure.step('Ждем пока показания счетчика за весь день изменятся'):
             main_page.is_total_count_change(total_order)
         total_order_new = main_page.wait_for_element(OrderFeedPageLocators.TOTAL_ORDERS).text
@@ -55,15 +55,15 @@ class TestOrderFeed:
         with allure.step('Делаем заказ'):
             main_page.take_order()
         with allure.step('Открыть страницу "Ленты"'):
-            driver.get(curl.MAIN_URL + curl.FEED_URL)
+            main_page.open(curl.MAIN_URL + curl.FEED_URL)
         total_order = main_page.wait_for_element(OrderFeedPageLocators.DAY_ORDERS).text
         with allure.step('Открыть страницу главную страницу"'):
-            driver.get(curl.MAIN_URL)
+            main_page.open(curl.MAIN_URL)
         main_page.main_page_loading_wait()
         with allure.step('Делаем заказ'):
             main_page.take_order()
         with allure.step('Открыть страницу "Ленты"'):
-            driver.get(curl.MAIN_URL + curl.FEED_URL)
+            main_page.open(curl.MAIN_URL + curl.FEED_URL)
         main_page.main_page_loading_wait()
         main_page.wait_for_element(OrderFeedPageLocators.DAY_ORDERS)
         total_order_new = main_page.wait_for_element(OrderFeedPageLocators.DAY_ORDERS).text
@@ -75,7 +75,7 @@ class TestOrderFeed:
         order_number = order
         order_feed_page = OrderFeedPage(driver)
         with allure.step('Открываем страницу ленты заказов'):
-            order_feed_page.open()
+            order_feed_page.open(curl.MAIN_URL + curl.FEED_URL)
         order_feed_page.main_page_loading_wait()
         with allure.step('Ждем появления номера заказа в секции В работе, условие срабатывает, '
                          'когда вместо текста, появляется нужный номер. Сложнейшее условие.'):

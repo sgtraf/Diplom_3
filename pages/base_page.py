@@ -9,6 +9,10 @@ class BasePage:
     def __init__(self, driver):
         self.driver = driver
 
+    @allure.step('Открытие страницы {url}')
+    def open(self, url):
+        self.driver.get(url)
+
     @allure.step('Ждем загрузки главной')
     def main_page_loading_wait(self):
         self.wait_for_element_hide(MainPageLocators.OVERLAY)
@@ -44,3 +48,7 @@ class BasePage:
         element = self.wait_for_element(locator, timeout)
         element.clear()
         element.send_keys(keys)
+
+    @allure.step("Получить текущий URL страницы")
+    def get_url(self):
+        return self.driver.current_url

@@ -43,7 +43,6 @@ def registration_user_api():
 
     response = requests.post(register_url, data=payload)
     assert response.status_code == 200
-    #print(response.json())
     yield payload
 
     response = requests.delete(curl.MAIN_URL_API+curl.DELETE_USER_URL, headers={"Authorization": response.json()["accessToken"]})
@@ -54,7 +53,7 @@ def registration_user_api():
 def login(driver, registration_user_api):
     login_page = LkPage(driver)
     with allure.step('Открыть страницу личного кабинета'):
-        login_page.open()
+        login_page.open(curl.MAIN_URL + curl.LK_URL)
     login_page.send_keys_to_input(LkPageLocators.EMAIL_INPUT, registration_user_api["email"])
     login_page.send_keys_to_input(LkPageLocators.PASSWORD_INPUT, registration_user_api["password"])
     with allure.step('Нажимаем на кнопку "Войти"'):

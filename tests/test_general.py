@@ -10,7 +10,7 @@ class TestGeneral:
     def test_transfer_to_construct(self, driver):
         lk_page = LkPage(driver)
         with allure.step('Открыть страницу "Восстановление пароля"'):
-            lk_page.open()
+            lk_page.open(curl.MAIN_URL + curl.LK_URL)
         lk_page.main_page_loading_wait()
         with allure.step('Нажать на кнопку Конструктора'):
             lk_page.click_on_element(MainPageLocators.BUTTON_CONSTRUCTOR)
@@ -25,7 +25,7 @@ class TestGeneral:
             lk_page.click_on_element(MainPageLocators.BUTTON_ORDER_FEED)
         lk_page.main_page_loading_wait()
         with allure.step('Проверяем URL страницы'):
-            assert driver.current_url == curl.MAIN_URL + curl.FEED_URL
+            assert lk_page.get_url() == curl.MAIN_URL + curl.FEED_URL
 
     @allure.title("Тест если кликнуть на ингредиент, появится всплывающее окно с деталями")
     def test_click_on_ingredient(self, driver):

@@ -10,20 +10,20 @@ class TestRecoverPassword:
         lk_page = LkPage(driver)
         lk_page.main_page_loading_wait()
         with allure.step('Открыть страницу личного кабинета'):
-            driver.get(curl.MAIN_URL + curl.LK_URL)
+            lk_page.open(curl.MAIN_URL + curl.LK_URL)
         with allure.step('Нажимаем на текст "Восстановление пароля"'):
             lk_page.click_on_element(RecoverPageLocators.TEXT_RECOVER_PASS)
         lk_page.main_page_loading_wait()
 
         with allure.step('Проверяем URL страницы'):
-            assert driver.current_url == curl.MAIN_URL+curl.FORGOT_PASS_URL
+            assert lk_page.get_url() == curl.MAIN_URL+curl.FORGOT_PASS_URL
 
     @allure.title("Тест ввод почты и клик по кнопке «Восстановить»")
     def test_click_on_recover_password(self, driver):
         lk_page = LkPage(driver)
         lk_page.main_page_loading_wait()
         with allure.step('Открыть страницу "Восстановление пароля"'):
-            driver.get(curl.MAIN_URL + curl.FORGOT_PASS_URL)
+            lk_page.open(curl.MAIN_URL + curl.FORGOT_PASS_URL)
         lk_page.main_page_loading_wait()
         with allure.step('Заполняем поле email'):
             lk_page.send_keys_to_input(RecoverPageLocators.FIELD_EMAIL_RECOVER, 'gggg@kkkk.ru')
@@ -33,14 +33,14 @@ class TestRecoverPassword:
         lk_page.wait_for_element(RecoverPageLocators.BUTTON_SAVE)
 
         with allure.step('Проверяем URL страницы'):
-            assert driver.current_url == curl.MAIN_URL+curl.RESET_PASS_URL
+            assert lk_page.get_url() == curl.MAIN_URL+curl.RESET_PASS_URL
 
     @allure.title("Тест клик по кнопке показать/скрыть пароль делает поле активным — подсвечивает его.")
     def test_click_on_recover_password(self, driver):
         lk_page = LkPage(driver)
         lk_page.main_page_loading_wait()
         with allure.step('Открыть страницу "Восстановление пароля"'):
-            driver.get(curl.MAIN_URL + curl.FORGOT_PASS_URL)
+            lk_page.open(curl.MAIN_URL + curl.FORGOT_PASS_URL)
         lk_page.main_page_loading_wait()
         with allure.step('Заполняем поле email'):
             lk_page.send_keys_to_input(RecoverPageLocators.FIELD_EMAIL_RECOVER, 'gggg@kkkk.ru')

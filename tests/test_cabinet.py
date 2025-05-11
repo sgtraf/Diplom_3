@@ -14,7 +14,7 @@ class TestCabinet:
             cabinet_page.click_on_element(MainPageLocators.BUTTON_CABINET)
         cabinet_page.wait_for_element(LkPageLocators.BUTTON_SAVE)
         with allure.step('Проверяем URL страницы'):
-            assert driver.current_url == curl.MAIN_URL+curl.LK_PROFILE
+            assert cabinet_page.get_url() == curl.MAIN_URL+curl.LK_PROFILE
 
     @allure.title("Тест перехода в раздел «История заказов»")
     def test_transfer_to_history(self, driver, login):
@@ -27,7 +27,7 @@ class TestCabinet:
         with allure.step('Нажать на кнопку Истории'):
             cabinet_page.click_on_element(LkPageLocators.BUTTON_HISTORY)
         with allure.step('Проверяем URL страницы'):
-            assert driver.current_url == curl.MAIN_URL+curl.LK_HISTORY
+            assert cabinet_page.get_url() == curl.MAIN_URL+curl.LK_HISTORY
 
     @allure.title("Тест выхода из аккаунта")
     def test_logout(self, driver, login):
@@ -42,4 +42,4 @@ class TestCabinet:
         cabinet_page.main_page_loading_wait()
         cabinet_page.wait_for_element(LkPageLocators.BUTTON_ENTER)
         with allure.step('Проверяем URL страницы'):
-            assert driver.current_url == curl.MAIN_URL+curl.LK_URL
+            assert cabinet_page.get_url() == curl.MAIN_URL+curl.LK_URL

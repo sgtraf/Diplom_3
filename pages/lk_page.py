@@ -8,9 +8,6 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 class LkPage(BasePage):
 
-    @allure.step('Открыть страницу ЛК')
-    def open(self):
-        self.driver.get(curl.MAIN_URL + curl.LK_URL)
 
     @allure.step('Проверяем исчезновение кнопки закрытия окна')
     def is_close_button_disappear(self):
