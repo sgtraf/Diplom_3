@@ -14,6 +14,3 @@ class OrderFeedPageLocators:
     DAY_ORDERS = (By.XPATH, ".//p[text()='Выполнено за сегодня:']/parent::*/p[@class='OrderFeed_number__2MbrQ "
                             "text text_type_digits-large']")
     IN_WORK = (By.XPATH, ".//ul[@class ='OrderFeed_orderListReady__1YFem OrderFeed_orderList__cBvyi']/li")
-
-
-

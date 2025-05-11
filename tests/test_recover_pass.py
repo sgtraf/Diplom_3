@@ -53,4 +53,3 @@ class TestRecoverPassword:
 
         with allure.step('Проверяем наличие слова focused в атрибуте class поля ввода пароля'):
             assert lk_page.is_focused_in_passwor_attr()
-

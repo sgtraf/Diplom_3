@@ -9,6 +9,3 @@ class RecoverPageLocators:
     BUTTON_SAVE = (By.XPATH, "//button[text()='Сохранить']")
     BUTTON_PASSWORD_VISIBILITY = (By.CSS_SELECTOR, ".input__icon-action")
     FIELD_PASSWORD = (By.XPATH, "//label[text()='Пароль']")
-
-
-
